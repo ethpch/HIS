@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7d3e1a25-1062-4fdf-9899-3d9e5489721b}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>manage.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{5F0BE9CA-D677-4A4D-8806-6076C0FAAD37};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Django launcher</LaunchProvider>
+    <InterpreterId>CondaEnv|CondaEnv|webproj</InterpreterId>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <DjangoSettingsModule>HIS.settings</DjangoSettingsModule>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="HIS\asgi.py" />
+    <Compile Include="HIS\settings.py" />
+    <Compile Include="HIS\urls.py" />
+    <Compile Include="HIS\wsgi.py" />
+    <Compile Include="HIS\__init__.py" />
+    <Compile Include="manage.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="HIS" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="CondaEnv|CondaEnv|webproj" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+    <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+    <WebProjectProperties>
+        <AutoAssignPort>True</AutoAssignPort>
+        <UseCustomServer>True</UseCustomServer>
+        <CustomServerUrl>http://localhost</CustomServerUrl>
+        <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+    </WebProjectProperties>
+    </FlavorProperties>
+    <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+    <WebProjectProperties>
+        <StartPageUrl>
+        </StartPageUrl>
+        <StartAction>CurrentPage</StartAction>
+        <AspNetDebugging>True</AspNetDebugging>
+        <SilverlightDebugging>False</SilverlightDebugging>
+        <NativeDebugging>False</NativeDebugging>
+        <SQLDebugging>False</SQLDebugging>
+        <ExternalProgram>
+        </ExternalProgram>
+        <StartExternalURL>
+        </StartExternalURL>
+        <StartCmdLineArguments>
+        </StartCmdLineArguments>
+        <StartWorkingDirectory>
+        </StartWorkingDirectory>
+        <EnableENC>False</EnableENC>
+        <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+    </WebProjectProperties>
+    </FlavorProperties>
+</VisualStudio>
+  </ProjectExtensions>
+</Project>
