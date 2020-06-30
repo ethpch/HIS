@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		{% load static %}
+		<meta charset="UTF-8">
+		<title>医生工作站_病例</title>
+		<link rel="stylesheet" href={% static "css/doctor_medicalrecord.css" %}/>
+		<link rel="stylesheet" href={% static "css/common.css" %}/>
+		<script type="text/javascript" src={% static "js/jquery-3.2.1.min.js" %}></script>
+		<script type="text/javascript" src={% static "js/csrf_protect.js" %}></script>
+		<script type="text/javascript" src={% static "js/doctor_medicalrecord.js" %}></script>
+		<script type="text/javascript" src={% static "js/common.js" %}></script>
+	</head>
+	<body>
+		<div id="div1" >
+			<div class="div1_nav" id="div1_1"  >
+				医生工作站_病例
+			</div>
+			<div class="div1_nav" id="div1_2"  >
+				医生工作站_检查申请
+			</div>
+			<div class="div1_nav" id="div1_3"  >
+				医生工作站_检验申请
+			</div>
+			<div class="div1_nav"  id="div1_4"   >
+				医生工作站_确诊
+			</div>
+			<div class="div1_logout"  id="logout"  >
+				退出
+			</div>
+		</div>
+		<div id="div2"  >
+			待诊患者
+		</div>
+		<div  id="div3" >
+			<table id="data_table">
+				<tr>
+					<th>病历号</th>
+					<th>姓名</th>
+					<th>性别</th>
+					<th>身份证号</th>
+					<th>挂号日期</th>
+					<th>挂号级别</th>
+					<th>是否已诊</th>
+					<th>状态</th>
+					<th>看诊科室</th>
+					<th>看诊医生</th>
+				</tr>
+				
+			</table>
+		</div>
+		<div id="div4"  >
+			已诊患者
+		</div>
+			<div  id="div5" >
+			<table id="data_table_1">
+				<tr>
+					<th>病历号</th>
+					<th>姓名</th>
+					<th>性别</th>
+					<th>身份证号</th>
+					<th>挂号日期</th>
+					<th>挂号级别</th>
+					<th>是否已诊</th>
+					<th>状态</th>
+					<th>看诊科室</th>
+					<th>看诊医生</th>
+				</tr>
+				
+			</table>
+		</div>
+	</body>
+</html>

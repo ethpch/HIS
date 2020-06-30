@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		{% load static %}
+		<meta charset="utf-8" />
+		<title>东软云医院登录页面</title>
+		<link rel="stylesheet" href="{% static "css/login.css" %}" />
+		<link rel="stylesheet" href="{% static "css/common.css" %}" />
+		<script type="text/javascript" src="{% static "js/jquery-3.2.1.min.js" %}"></script>
+		<script type="text/javascript" src={% static "js/csrf_protect.js" %}></script>
+		<script type="text/javascript" src="{% static "js/login.js" %}"></script>
+	</head>
+	<body>
+		<div id="div1" >
+			<div id="div1_1" >
+				东软云医院管理系统
+			</div>
+			<form action="" id="form1">
+			<div class="div1_data">
+				<div class="data_name">
+					用户名：
+				</div>
+				<div>
+					<input class="form_control" name="username" type="text"/>
+				</div>
+			</div>
+			<div class="div1_data">
+				<div class="data_name">
+					密 码：
+				</div>
+				<div>
+					<input type="password" name="password" class="form_control"/>
+				</div>
+			</div>
+			<div class="div1_data">
+				<div  class="data_name">
+					角 色：
+				</div>
+				<div>
+					<select  id="role" name="role">
+						<option value="-1">------请选择------</option>
+					</select>
+				</div>
+			</div>
+			</form>
+			<div  id="div1_2"  >
+				<button type="button" id="loginBtn">登 录</button>
+			</div>
+		</div>
+	</body>
+</html>

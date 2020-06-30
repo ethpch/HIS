@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		{% load static %}
+		<meta charset="UTF-8">
+		<title>医生工作站_检验申请</title>
+		<link rel="stylesheet" href={% static "css/doctor_inspectitem.css" %}/>
+		<link rel="stylesheet" href={% static "css/common.css" %}/>
+		<script type="text/javascript" src={% static "js/jquery-3.2.1.min.js" %}></script>
+		<script type="text/javascript" src={% static "js/csrf_protect.js" %}></script>
+		<script type="text/javascript" src={% static "js/doctor_inspectitem.js" %}></script>
+		<script type="text/javascript" src={% static "js/common.js" %}></script>
+	</head>
+	<body>
+		<div id="div1">
+			<div class="div1_nav" id="div1_1">
+				医生工作站_病例
+			</div>
+			<div class="div1_nav" id="div1_2">
+				医生工作站_检查申请
+			</div>
+			<div class="div1_nav" id="div1_3">
+				医生工作站_检验申请
+			</div>
+			<div class="div1_nav" id="div1_4">
+				医生工作站_确诊
+			</div>
+			<div class="div1_logout" id="logout">
+				退出
+			</div>
+		</div>
+		<div id="div2">
+			病历号：<input type="text" id="pid"/><img id="search" src={% static "img/search.png" %}/>
+		</div>
+		<div id="div3" class="data">
+			<div>
+				病历号：<input type="text" id="pno" value="" readonly="readonly"/>
+			</div>
+			<div>
+				姓名：<input type="text" id="pname" value="" readonly="readonly"/>
+			</div>
+			<div>
+				性别：
+				<input type="radio" name="sex" id="sex1" value="男" readonly="readonly"/>男
+				<input type="radio" name="sex" id="sex0" value="女" readonly="readonly"/>女
+			</div>
+			<div>
+				挂号日期：<input type="text" id="createdate" value="" readonly="readonly"/>
+			</div>
+		</div>
+		<div id="div4" class="data">
+			<div>
+				身份证号：<input type="text" id="idcard" value="" readonly="readonly"/>
+			</div>
+			<div>
+				挂号级别：<input type="text" id="level" value="" readonly="readonly"/>
+			</div>
+			<div>
+				是否已诊：<span id="pstatus"></span>
+			</div>
+			<div>
+				状态：<span id="status"></span>
+			</div>
+		</div>
+		<div id="div5" class="data">
+			<div>
+				挂号科室：<input type="text" id="deptname" value="" readonly="readonly"/>
+			</div>
+			<div>
+				看诊医生：<input type="text" id="dname" value="" readonly="readonly"/>
+			</div>
+			<div>
+			</div>
+			<div>
+			</div>
+		</div>
+		<div id="div6">
+			检验项目
+		</div>
+		<div id="div7">
+			检验项目：
+			<select id="inspectitem">
+				<option value="-1">------请选择------</option>
+			</select>
+		</div>
+		<div id="div8">
+		  <form id="form1">
+			<table id="item_data">
+				<tr>
+					<th>检验项目</th>
+					<th>数量</th>
+					<th>金额</th>
+					<th></th>
+				</tr>
+			</table>
+		  </form>
+		</div>
+		<div id="div9">
+			<button type="button" id="submitItem">提 交 检 验 申 请</button>
+		</div>
+	</body>
+</html>

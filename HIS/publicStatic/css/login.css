@@ -1,0 +1,48 @@
+#div1{
+	width: 500px;
+	height: 300px;
+	background-color: #D7D7D7;
+	position: relative;
+	top: 200px;
+	left: 450px;
+}
+#div1_1{
+	width: 100%;
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	color: blue;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 36px;
+}
+
+.div1_data{
+	width: 100%;
+	height: 50px;
+	display: flex;
+	margin-top: 5px;
+}
+.data_name{
+	width: 120px;
+	text-align: right;
+}
+.form_control{
+	width: 300px;
+}
+#role{
+	width: 303px;
+	height: 22px;
+}
+#div1_2{
+	padding-left: 52px;
+}
+#loginBtn{
+	width: 374px;
+	height: 30px;
+	color: blue;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+

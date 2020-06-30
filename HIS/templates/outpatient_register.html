@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		{% load static %}
+		<meta charset="UTF-8">
+		<title>门诊管理_挂号</title>
+		<link rel="stylesheet" href={% static "css/outpatient_register.css" %}/>
+		<link rel="stylesheet" href={% static "css/common.css" %}/>
+		<script type="text/javascript" src={% static "js/jquery-3.2.1.min.js" %}></script>
+		<script type="text/javascript" src={% static "js/csrf_protect.js" %}></script>
+		<script type="text/javascript" src={% static "js/outpatient_register.js" %}></script>
+		<script type="text/javascript" src={% static "js/common.js" %}></script>
+	</head>
+	<body>
+		<div id="div1" >
+			<div class="div1_nav" id="div1_1">
+				门诊挂号管理
+			</div>
+			<div class="div1_nav" id="div1_2">
+				门诊收费管理
+			</div>
+			<div class="div1_nav" id="refund">
+				门诊退号管理
+			</div>
+			<div class="div1_logout" id="logout">
+				退出
+			</div>
+		</div>
+		<div id="div2">
+			挂号信息
+		</div>
+		<div id="div3">
+			<form id="form1">
+				<div id="div3_1">
+					<div>
+						病历号：<input type="text" id="pid" name="pid"/><span class="star">*</span>
+					</div>
+					<div>
+						姓名：<input type="text" name="pname"/><span class="star">*</span>
+					</div>
+					<div>
+						性别：<input type="radio" name="sex" value="男"/>男
+						    <input type="radio" name="sex" value="女"/>女
+						    <span class="star" >*</span>
+					</div>
+					<div>
+						年龄：<input type="text" id="age" name="age"/>
+					</div>
+					<div>
+						出生日期：<input type="text" class="data_birthday" id="year" name="year"/>年<input type="text" name="month" class="data_birthday"/>月
+					</div>
+				</div>
+				<div id="div3_2">
+					<div>
+						身份证号：<input type="text" name="idcard"/><span class="star">*</span>
+					</div>
+					<div>
+						家庭住址：<input type="text" name="address"/>
+					</div>
+					<div>
+						挂号级别：
+						<select id="level" name="levelid">
+							<option data-cost="0"  value="-1">------请选择------</option>
+						</select>
+						<span class="star" >*</span>
+					</div>
+				</div>
+				<div  id="div3_3">
+					<div>
+						挂号科室：
+						<select id="dept" name="deptid">
+							<option value="-1">------请选择------</option>
+						</select><span class="star">*</span>
+					</div>
+					<div>
+						看诊医生：
+						<select id="doctor" name="doctorid">
+							<option value="-1" >------请选择------</option>
+						</select><span class="star" >*</span>
+					</div>
+					<div>
+						挂号日期：
+						<input  type="date" name="createDate"/><span class="star">*</span>
+					</div>
+				</div>
+				<div id="div3_4">
+					<div  id="div3_4_1">
+						是否需要病历本：
+						    <input type="radio" name="flag" id="yes" value="1"/>是
+						    <input type="radio" name="flag" id="no" value="0"/>否
+						    <span class="star">*</span>
+					</div>
+					<div id="div3_4_2">
+						总金额：<input type="text" id="cost" name="cost" value="0"/>
+					</div>
+					<div id="div3_4_3">
+						<button type="button" id="regBtn">挂  号</button>
+					</div>
+				</div>
+				
+			</form>
+		</div>
+		<div id="div4" >
+			<span>挂号信息列表</span>
+			<div id="div4_1" >
+				<img src={% static "img/refresh.png" %} id="refresh"/><label>刷新</label>
+			</div>
+		</div>
+		<div  id="div5" >
+			<table id="data_table">
+				<tr>
+					<th>病历号</th>
+					<th>姓名</th>
+					<th>性别</th>
+					<th>身份证号</th>
+					<th>挂号日期</th>
+					<th>挂号级别</th>
+					<th>是否已诊</th>
+					<th>状态</th>
+					<th>看诊科室</th>
+					<th>看诊医生</th>
+				</tr>
+			</table>
+		</div>
+		<div id="div6" >
+			<button type="button" id="last">上一页</button>
+			当前是第<span id="pnum" >1</span>页
+			<button type="button" id="next">下一页</button>
+		</div>
+	</body>
+</html>

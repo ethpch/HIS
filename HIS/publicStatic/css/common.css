@@ -1,0 +1,6 @@
+body{
+	min-width: 1200px;
+}
+#logout{
+	cursor: pointer;
+}

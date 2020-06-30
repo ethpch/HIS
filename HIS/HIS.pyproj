@@ -14,6 +14,7 @@
     <InterpreterId>CondaEnv|CondaEnv|webproj</InterpreterId>
     <WebBrowserUrl>http://localhost</WebBrowserUrl>
     <DjangoSettingsModule>HIS.settings</DjangoSettingsModule>
+    <SuppressConfigureTestFrameworkPrompt>true</SuppressConfigureTestFrameworkPrompt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
@@ -21,51 +22,134 @@
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="api\admin.py" />
+    <Compile Include="api\apps.py" />
+    <Compile Include="api\migrations\__init__.py" />
+    <Compile Include="api\models.py" />
+    <Compile Include="api\tests.py" />
+    <Compile Include="api\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="api\views.py" />
+    <Compile Include="api\__init__.py" />
+    <Compile Include="HISOperator\admin.py" />
+    <Compile Include="HISOperator\apps.py" />
+    <Compile Include="HISOperator\migrations\__init__.py" />
+    <Compile Include="HISOperator\models.py" />
+    <Compile Include="HISOperator\tests.py" />
+    <Compile Include="HISOperator\urls.py" />
+    <Compile Include="HISOperator\views.py" />
+    <Compile Include="HISOperator\__init__.py" />
     <Compile Include="HIS\asgi.py" />
     <Compile Include="HIS\settings.py" />
     <Compile Include="HIS\urls.py" />
     <Compile Include="HIS\wsgi.py" />
     <Compile Include="HIS\__init__.py" />
+    <Compile Include="hospital\admin.py" />
+    <Compile Include="hospital\apps.py" />
+    <Compile Include="hospital\migrations\__init__.py" />
+    <Compile Include="hospital\models.py" />
+    <Compile Include="hospital\tests.py" />
+    <Compile Include="hospital\urls.py" />
+    <Compile Include="hospital\views.py" />
+    <Compile Include="hospital\__init__.py" />
     <Compile Include="manage.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="api\" />
+    <Folder Include="api\migrations\" />
+    <Folder Include="api\templates\" />
+    <Folder Include="api\templates\api\" />
     <Folder Include="HIS" />
+    <Folder Include="HISOperator\" />
+    <Folder Include="HISOperator\migrations\" />
+    <Folder Include="HISOperator\templates\" />
+    <Folder Include="HISOperator\templates\HISOperator\" />
+    <Folder Include="hospital\" />
+    <Folder Include="hospital\migrations\" />
+    <Folder Include="hospital\templates\" />
+    <Folder Include="hospital\templates\hospital\" />
+    <Folder Include="publicStatic\" />
+    <Folder Include="publicStatic\css\" />
+    <Folder Include="publicStatic\img\" />
+    <Folder Include="publicStatic\js\" />
+    <Folder Include="templates\" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="CondaEnv|CondaEnv|webproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="api\templates\api\index.html" />
+    <Content Include="HISOperator\templates\HISOperator\index.html" />
+    <Content Include="hospital\templates\hospital\index.html" />
+    <Content Include="publicStatic\css\common.css" />
+    <Content Include="publicStatic\css\doctor_checkitem.css" />
+    <Content Include="publicStatic\css\doctor_inspectitem.css" />
+    <Content Include="publicStatic\css\doctor_medicalrecord.css" />
+    <Content Include="publicStatic\css\doctor_regmedicalrecord.css" />
+    <Content Include="publicStatic\css\doctor_result.css" />
+    <Content Include="publicStatic\css\login.css" />
+    <Content Include="publicStatic\css\outpatient_pay.css" />
+    <Content Include="publicStatic\css\outpatient_refund.css" />
+    <Content Include="publicStatic\css\outpatient_register.css" />
+    <Content Include="publicStatic\img\refresh.png" />
+    <Content Include="publicStatic\img\rubbish.png" />
+    <Content Include="publicStatic\img\search.png" />
+    <Content Include="publicStatic\js\admin.js" />
+    <Content Include="publicStatic\js\common.js" />
+    <Content Include="publicStatic\js\csrf_protect.js" />
+    <Content Include="publicStatic\js\doctor_checkitem.js" />
+    <Content Include="publicStatic\js\doctor_inspectitem.js" />
+    <Content Include="publicStatic\js\doctor_medicalrecord.js" />
+    <Content Include="publicStatic\js\doctor_regmedicalrecord.js" />
+    <Content Include="publicStatic\js\doctor_result.js" />
+    <Content Include="publicStatic\js\jquery-3.2.1.min.js" />
+    <Content Include="publicStatic\js\login.js" />
+    <Content Include="publicStatic\js\outpatient_pay.js" />
+    <Content Include="publicStatic\js\outpatient_refund.js" />
+    <Content Include="publicStatic\js\outpatient_register.js" />
+    <Content Include="templates\doctor_checkitem.html" />
+    <Content Include="templates\doctor_inspectitem.html" />
+    <Content Include="templates\doctor_medicalrecord.html" />
+    <Content Include="templates\doctor_regmedicalrecord.html" />
+    <Content Include="templates\doctor_result.html" />
+    <Content Include="templates\login.html" />
+    <Content Include="templates\outpatient_pay.html" />
+    <Content Include="templates\outpatient_refund.html" />
+    <Content Include="templates\outpatient_register.html" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
   <ProjectExtensions>
     <VisualStudio>
-    <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
-    <WebProjectProperties>
-        <AutoAssignPort>True</AutoAssignPort>
-        <UseCustomServer>True</UseCustomServer>
-        <CustomServerUrl>http://localhost</CustomServerUrl>
-        <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-    </WebProjectProperties>
-    </FlavorProperties>
-    <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
-    <WebProjectProperties>
-        <StartPageUrl>
-        </StartPageUrl>
-        <StartAction>CurrentPage</StartAction>
-        <AspNetDebugging>True</AspNetDebugging>
-        <SilverlightDebugging>False</SilverlightDebugging>
-        <NativeDebugging>False</NativeDebugging>
-        <SQLDebugging>False</SQLDebugging>
-        <ExternalProgram>
-        </ExternalProgram>
-        <StartExternalURL>
-        </StartExternalURL>
-        <StartCmdLineArguments>
-        </StartCmdLineArguments>
-        <StartWorkingDirectory>
-        </StartWorkingDirectory>
-        <EnableENC>False</EnableENC>
-        <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
-    </WebProjectProperties>
-    </FlavorProperties>
-</VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
   </ProjectExtensions>
 </Project>

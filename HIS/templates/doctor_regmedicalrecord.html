@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		{% load static %}
+		<meta charset="UTF-8">
+		<title>医生工作站_病例</title>
+		<link rel="stylesheet" href={% static "css/doctor_regmedicalrecord.css" %}/>
+		<link rel="stylesheet" href={% static "css/common.css" %}/>
+		<script type="text/javascript" src={% static "js/jquery-3.2.1.min.js" %}></script>
+		<script type="text/javascript" src={% static "js/csrf_protect.js" %}></script>
+		<script type="text/javascript" src={% static "js/doctor_regmedicalrecord.js" %}></script>
+		<script type="text/javascript" src={% static "js/common.js" %}></script>
+	</head>
+	<body>
+		<div id="div1">
+			<div class="div1_nav" id="div1_1">
+				医生工作站_病例
+			</div>
+			<div class="div1_nav">
+				医生工作站_检查申请
+			</div>
+			<div class="div1_nav">
+				医生工作站_检验申请
+			</div>
+			<div class="div1_nav">
+				医生工作站_确诊
+			</div>
+			<div class="div1_logout" id="logout">
+				退出
+			</div>
+		</div>
+		<div id="div3" class="data">
+			<div>
+				病历号：<input type="text" id="pno"  value="" readonly="readonly"/>
+			</div>
+			<div>
+				姓名：<input type="text" id="pname"  value="" readonly="readonly"/>
+			</div>
+			<div>
+				性别：
+				<input type="radio" name="sex" id="sex1"  value="男" readonly="readonly"/>男
+				<input type="radio" name="sex" id="sex0"  value="女" readonly="readonly"/>女
+			</div>
+			<div>
+				挂号日期：<input type="text" id="createdate" value="" readonly="readonly"/>
+			</div>
+		</div>
+		<div id="div4" class="data">
+			<div>
+				身份证号：<input type="text" id="idcard" value="" readonly="readonly"/>
+			</div>
+			<div>
+				挂号级别：<input type="text" id="level"  value="" readonly="readonly"/>
+			</div>
+			<div>
+				是否已诊：<span id="pstatus"></span>
+			</div>
+			<div>
+				状态：<span id="status"></span>
+			</div>
+		</div>
+		<div id="div5" class="data">
+			<div>
+				挂号科室：<input type="text" id="deptname" value="" readonly="readonly"/>
+			</div>
+			<div>
+				看诊医生：<input type="text" id="dname" value="" readonly="readonly"/>
+			</div>
+			<div>
+			</div>
+			<div>
+			</div>
+		</div>
+		<div id="div2">
+			病例信息
+		</div>
+		<form id="form1">
+			<div class="form_control">
+				<div class="form_data_name">
+					主诉：
+				</div>
+				<div>
+					<textarea name="description" class="form_data"></textarea>
+				</div>
+			</div>
+			<div  class="form_control">
+				<div class="form_data_name">
+					疾病史：
+				</div>
+				<div>
+					<textarea class="form_data" name="medicalhistory"></textarea>
+				</div>
+			</div>
+			<div class="form_control">
+				<div class="form_data_name">
+					家族病史：
+				</div>
+				<div>
+					<textarea class="form_data" name="familyhistory"></textarea>
+				</div>
+			</div>
+			<div class="form_control">
+				<div class="form_data_name">
+					初步诊断：
+				</div>
+				<div>
+					<textarea class="form_data" name="initialresult"></textarea>
+				</div>
+			</div>
+			
+		</form>
+		<div id="div6">
+			<button type="button" id="regMr"  >生  成  病  历</button>
+			<button type="button" id="goback"  >返    回</button>
+		</div>
+	</body>
+</html>

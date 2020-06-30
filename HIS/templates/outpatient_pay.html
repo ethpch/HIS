@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		{% load static %}
+		<meta charset="UTF-8">
+		<title>门诊管理_收费</title>
+		<link rel="stylesheet" href={% static "css/outpatient_pay.css" %}/>
+		<link rel="stylesheet" href={% static "css/common.css" %}/>
+		<script type="text/javascript" src={% static "js/jquery-3.2.1.min.js" %}></script>
+		<script type="text/javascript" src={% static "js/csrf_protect.js" %}></script>
+		<script type="text/javascript" src={% static "js/outpatient_pay.js" %}></script>
+		<script type="text/javascript" src={% static "js/common.js" %}></script>
+	</head>
+	<body>
+		<div id="div1">
+			<div class="div1_nav" id="div1_1">
+				门诊挂号管理
+			</div>
+			<div class="div1_nav" id="div1_2">
+				门诊收费管理
+			</div>
+			<div class="div1_nav" id="refund">
+				门诊退号管理
+			</div>
+			<div class="div1_logout" id="logout">
+				退出
+			</div>
+		</div>
+		<div id="div2">
+			病历号：<input type="text" id="pid"/><img id="search" src="img/search.png"/>
+		</div>
+		<div id="div3" class="data">
+			<div>
+				病历号：<input type="text" id="pno"  value="" readonly="readonly"/>
+			</div>
+			<div>
+				姓名：<input type="text" id="pname" value="" readonly="readonly"/>
+			</div>
+			<div>
+				性别：
+				<input type="radio" name="sex" id="sex1"  value="男" readonly="readonly"/>男
+				<input type="radio" name="sex" id="sex0"  value="女" readonly="readonly"/>女
+			</div>
+			<div>
+				挂号日期：<input type="text" id="createdate" value="" readonly="readonly"/>
+			</div>
+		</div>
+		<div id="div4" class="data">
+			<div>
+				身份证号：<input type="text" id="idcard" value="" readonly="readonly"/>
+			</div>
+			<div>
+				挂号级别：<input type="text" id="level"  value="" readonly="readonly"/>
+			</div>
+			<div>
+				是否已诊：<span id="pstatus"></span>
+			</div>
+			<div>
+				状态：<span id="status"></span>
+			</div>
+		</div>
+		<div id="div5" class="data">
+			<div>
+				挂号科室：<input type="text" id="deptname" value="" readonly="readonly"/>
+			</div>
+			<div>
+				看诊医生：<input type="text" id="dname" value="" readonly="readonly"/>
+			</div>
+			<div>
+			</div>
+			<div>
+			</div>
+		</div>
+		<div id="div6">
+			收费列表
+		</div>
+		<div id="div8">
+		  <form id="form1">
+			<table id="item_data">
+				<tr>
+					<th>
+						<input type="checkbox" id="selectAll">
+					</th>
+					<th>项目名称</th>
+					<th>单价</th>
+					<th>数量</th>
+					<th>金额</th>
+					<th>缴费状态</th>
+				</tr>
+			</table>
+		  </form>
+		</div>
+		<div id="div9">
+			<div>
+				总金额：<span id="totalPay">0</span>元
+				应收金额：<span id="currentPay">0</span>元
+			</div>
+		</div>
+		<div id="div10">
+			<button type="button" id="submitItem">收    费</button>
+		</div>
+	</body>
+</html>

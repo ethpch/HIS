@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		{% load static %}
+		<meta charset="UTF-8">
+		<title>门诊管理_退号</title>
+		<link rel="stylesheet" href={% static "css/outpatient_refund.css" %}/>
+		<link rel="stylesheet" href={% static "css/common.css" %}/>
+		<script type="text/javascript" src={% static "js/jquery-3.2.1.min.js" %}></script>
+		<script type="text/javascript" src={% static "js/csrf_protect.js" %}></script>
+		<script type="text/javascript" src={% static "js/outpatient_refund.js" %}></script>
+		<script type="text/javascript" src={% static "js/common.js" %}></script>
+	</head>
+	<body>
+		<div id="div1">
+			<div class="div1_nav" id="div1_1">
+				门诊挂号管理
+			</div>
+			<div class="div1_nav" id="div1_2">
+				门诊收费管理
+			</div>
+			<div class="div1_nav" id="div1_3">
+				门诊退号管理
+			</div>
+			<div class="div1_logout" id="logout">
+				退出
+			</div>
+		</div>
+		<div id="div2">
+			病历号：<input type="text" id="pid"/><img  id="search" src={% static "img/search.png" %}/>
+		</div>
+		<div id="div3" class="data">
+			<div>
+				病历号：<input type="text" id="pno" value="" readonly="readonly"/>
+			</div>
+			<div>
+				姓名：<input type="text" id="pname" value="" readonly="readonly"/>
+			</div>
+			<div>
+				性别：
+				<input type="radio" name="sex" id="sex1" value="男" readonly="readonly"/>男
+				<input type="radio" name="sex" id="sex0" value="女" readonly="readonly"/>女
+			</div>
+			<div>
+				挂号日期：<input type="text" id="createdate" value="" readonly="readonly"/>
+			</div>
+		</div>
+		<div id="div4" class="data">
+			<div>
+				身份证号：<input type="text" id="idcard" value="" readonly="readonly"/>
+			</div>
+			<div>
+				挂号级别：<input type="text" id="level"  value="" readonly="readonly"/>
+			</div>
+			<div>
+				是否已诊：<span id="pstatus"></span>
+			</div>
+			<div>
+				状态：<span id="status"></span>
+			</div>
+		</div>
+		<div id="div5" class="data">
+			<div>
+				挂号科室：<input type="text" id="deptname" value="" readonly="readonly"/>
+			</div>
+			<div>
+				看诊医生：<input type="text" id="dname" value="" readonly="readonly"/>
+			</div>
+			<div>
+				
+			</div>
+			<div>
+				<button type="button" id="refund" disabled="disabled">退    号</button>
+			</div>
+		</div>
+	</body>
+</html>
