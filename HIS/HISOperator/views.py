@@ -2,23 +2,25 @@
 
 # Create your views here.
 
+
 from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
 from django.middleware.csrf import get_token
-from .models import User
 
 def login(request):
-    if 'userid' in request.session.keys():
-        role = User.objects.filter(userid=request.session['userid']).first().role
+    if 'userrole' in request.session.keys():
+        role = request.session['userrole']
         if role == '门诊管理员':
             return redirect(reverse('outpatient_register'))
         elif role == '医生管理员':
             return redirect(reverse('doctor_medicalrecord'))
+        elif role == '系统管理员':
+            pass
     else:
         return render(request, 'login.html')
 
 def logout(request):
-    request.session.pop('userid')
+    request.session.clear()
     return HttpResponse('1')
 
 def get_csrf(request):

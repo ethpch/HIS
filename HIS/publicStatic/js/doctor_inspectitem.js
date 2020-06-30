@@ -81,7 +81,7 @@
 			if(flag==false){
 				$("#item_data").append("<tr><td>"+selectedOption[0].text+"</td><td><input type='hidden' name='iirList["+num+"].inspectid'   value='"+selectedOption[0].value+"' ><input type='text' name='iirList["+num+"].amount'   class='amount'   value='1' ><input type='hidden' value='"+selectedOption.attr("data-price")+"'>" +
 						"</td><td>"+selectedOption.attr("data-price")+"</td>" +
-								"<td><img src='img/rubbish.png' class='rubbish'    ></td></tr>");
+								"<td><img src='/static/img/rubbish.png' class='rubbish'    ></td></tr>");
 				num++;
 			}
 		}

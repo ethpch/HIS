@@ -8,11 +8,11 @@ urlpatterns = [
     # doctor_checkitem
     path('getAllCheckItem', getAllCheckItem),
     path('getPatientByNo/<int:pid>', getPatientByNo),
-    path('saveCheckItemRecord/<int:pid>/<int:doctorid>', saveCheckItemRecord),
+    path('saveCheckItemRecord/<int:pid>/<str:dname>', saveCheckItemRecord),
     # doctor_inspectitem
     path('getAllInspectItem', getAllInspectItem),
     #path('getPatientByNo/<int:pid>', getPatientByNo),
-    path('saveInspectItemRecord/<int:pid>/<int:doctorid>', saveInspectItemRecord),
+    path('saveInspectItemRecord/<int:pid>/<str:dname>', saveInspectItemRecord),
     # doctor_medicalrecord
     path('getPatientDataByDoctor', getPatientDataByDoctor),
     # doctor_regmedicalrecord

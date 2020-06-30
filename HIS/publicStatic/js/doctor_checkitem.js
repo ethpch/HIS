@@ -82,7 +82,7 @@
 			if(flag==false){
 				$("#item_data").append("<tr><td>"+selectedOption[0].text+"</td><td><input type='hidden' name='cirList["+num+"].cid'   value='"+selectedOption[0].value+"' ><input type='text' name='cirList["+num+"].amount'   class='amount'   value='1' ><input type='hidden' value='"+selectedOption.attr("data-price")+"'>" +
 						"</td><td>"+selectedOption.attr("data-price")+"</td>" +
-								"<td><img src='img/rubbish.png' class='rubbish'    ></td></tr>");
+								"<td><img src='/static/img/rubbish.png' class='rubbish'    ></td></tr>");
 				num++;
 			}
 		}
@@ -109,12 +109,13 @@
 	$("#submitItem").click(function(){
 		if($("#pid").val()==""){
 			alert("请先选择患者！")
-		}else{
+		} else {
+			console.log(JSON.stringify($("#form1").serialize()));
 			$.ajax({
 				type:"post",
 				url:"/api/saveCheckItemRecord/"+$("#pid").val()+"/"+$("#dname").val(),
 				data:$("#form1").serialize(),
-				dataType:"json",
+				dataType: "json",
 				success:function(data){
 					console.log(data);
 					if(data.result=="提交检查申请成功"){

@@ -37,7 +37,7 @@
 	});
 	
 	//点击生成病历按钮存储病例信息
-	$("#regMr").click(function(){
+	$("#regMr").click(function () {
 		$.ajax({
 			type:"post",
 			url:"/api/regMedicalRecord/"+pid,
@@ -51,5 +51,7 @@
 		});
 	})
 	
-	
+	$("#goback").click(function () {
+		window.location.href = document.referrer;
+	})
 })

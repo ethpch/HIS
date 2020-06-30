@@ -3,6 +3,8 @@
 # Register your models here.
 
 from .models import User
+admin.site.site_title = 'HIS管理后台'
+admin.site.site_header = 'HIS管理'
 
 
 @admin.register(User)

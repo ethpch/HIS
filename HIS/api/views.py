@@ -3,10 +3,10 @@
 
 # Create your views here.
 
+
 from django.http import HttpResponse, JsonResponse
 from HISOperator.models import User
 from hospital.models import *
-
 
 # admin
 def patient_dept_doctor(request):
@@ -20,53 +20,129 @@ def patient_dept_doctor(request):
 
 # doctor_checkitem
 def getAllCheckItem(request):
-    return
+    if request.method == 'POST':
+        ci = checkitem.objects.values().distinct()
+        return JsonResponse(list(ci), safe=False)
 
 def getPatientByNo(request, pid):
-    return
+    if request.method == 'POST':
+        pat = patient.objects.filter(pid=pid).first()
+        if pat:
+            data = {
+                'pid': pat.pid,
+                'pname': pat.pname,
+                'sex': pat.sex,
+                'createDate': pat.createdate.strftime('%Y-%m-%d'),
+                'idcard': pat.idcard,
+                'level': {'levelname': pat.levelid.levelname},
+                'pstatus': pat.pstatus,
+                'dept': {'deptname': pat.deptid.deptname},
+                'doc': {'dname': pat.doctorid.dname},
+                }
+            return JsonResponse(data)
+        else:
+            return JsonResponse({'pid': 0})
 
-def saveCheckItemRecord(request, pid, doctorid):
-    return
+def saveCheckItemRecord(request, pid, dname):
+    if request.method == 'POST':
+        if len(request.POST) > 0:
+            pat = patient.objects.filter(pid=pid).first()
+        try:
+            for k, v in request.POST.items():
+                if 'cid' in k:
+                    data = {
+                        'pid': pat,
+                        'cid': checkitem.objects.filter(id=int(v)).first(),
+                        'amount': int(request.POST.get(k.replace('cid', 'amount'))),
+                        'paystatus': 0,
+                        }
+                    checkitemrecord.objects.create(**data)
+            return JsonResponse({'result': '提交检查申请成功'})
+        except Exception:
+            return JsonResponse({'result': '提交检查申请失败'})
 
 # doctor_inspectitem
 def getAllInspectItem(request):
-    return
+    if request.method == 'POST':
+        ii = inspectitem.objects.values().distinct()
+        return JsonResponse(list(ii), safe=False)
 
-def saveInspectItemRecord(request, pid, doctorid):
-    return
+def saveInspectItemRecord(request, pid, dname):
+    if request.method == 'POST':
+        if len(request.POST) > 0:
+            pat = patient.objects.filter(pid=pid).first()
+        try:
+            for k, v in request.POST.items():
+                if 'inspectid' in k:
+                    data = {
+                        'pid': pat,
+                        'inspectid': inspectitem.objects.filter(id=int(v)).first(),
+                        'amount': int(request.POST.get(k.replace('iid', 'amount'))),
+                        'paystatus': 0,
+                        }
+                    inspectitemrecord.objects.create(**data)
+            return JsonResponse({'result': '提交检验申请成功'})
+        except Exception:
+            return JsonResponse({'result': '提交检验申请失败'})
 
 # doctor_medicalrecord
 def getPatientDataByDoctor(request):
-    return
+    if request.method == 'POST':
+        pat = patient.objects.all()
+        data = []
+        for i in pat:
+            data.append({
+                'pid': i.pid,
+                'pname': i.pname,
+                'sex': i.sex,
+                'createDate': i.createdate.strftime('%Y-%m-%d'),
+                'idcard': i.idcard,
+                'level': {'levelname': i.levelid.levelname},
+                'pstatus': i.pstatus,
+                'dept': {'deptname': i.deptid.deptname},
+                'doc': {'dname': i.doctorid.dname},
+                })
+        return JsonResponse(data, safe=False)
 
 # doctor_regmedicalrecord
-def regMedicalRecord(request):
-    return
+def regMedicalRecord(request, pid):
+    if request.method == 'POST':
+        data = {
+            'pid': patient.objects.filter(pid=pid).first(),
+            'description': request.POST.get('description'),
+            'medicalhistory': request.POST.get('medicalhistory'),
+            'familyhistory': request.POST.get('familyhistory'),
+            'initialresult': request.POST.get('initialresult')
+            }
+        data['status'] = 1
+        data['operator'] = User.objects.filter(userid=request.session['userid']).first()
+        medicalrecord.objects.create(**data)
+        return JsonResponse({'result': '生成病例成功'})
 
 # doctor_result
 def getPatientAndMrData(request, pid):
     if request.method == 'POST':
-        targetpat = patient.objects.filter(pid=pid).first()
-        targetmr = medicalrecord.objects.filter(pid__pid=pid).first()
-        if targetpat and targetmr:
+        pat = patient.objects.filter(pid=pid).first()
+        mr = medicalrecord.objects.filter(pid__pid=pid).last()
+        if pat and mr:
             data = {
-                'pid': targetmr.id,
-                'pname': targetpat.pname,
-                'sex': targetpat.sex,
-                'createDate': targetpat.createdate.strftime('%Y-%m-%d'),
-                'idcard': targetpat.idcard,
-                'level': {'levelname': targetpat.levelid.levelname},
-                'pstatus': targetpat.pstatus,
-                'dept': {'deptname': targetpat.deptid.deptname},
-                'doc': {'dname': targetpat.doctorid.dname},
+                'pid': pat.pid,
+                'pname': pat.pname,
+                'sex': pat.sex,
+                'createDate': pat.createdate.strftime('%Y-%m-%d'),
+                'idcard': pat.idcard,
+                'level': {'levelname': pat.levelid.levelname},
+                'pstatus': pat.pstatus,
+                'dept': {'deptname': pat.deptid.deptname},
+                'doc': {'dname': pat.doctorid.dname},
                 'mr': {
-                    'description': targetmr.description,
-                    'medicalhistory': targetmr.medicalhistory,
-                    'familyhistory': targetmr.familyhistory,
-                    'initialresult': targetmr.initialresult,
-                    'result': targetmr.result,
-                    'finalresult': targetmr.finalresult,
-                    'id': targetmr.id
+                    'description': mr.description,
+                    'medicalhistory': mr.medicalhistory,
+                    'familyhistory': mr.familyhistory,
+                    'initialresult': mr.initialresult,
+                    'result': mr.result,
+                    'finalresult': mr.finalresult,
+                    'id': mr.id
                     },
                 }
             return JsonResponse(data)
@@ -82,6 +158,7 @@ def updateMedicalRecord(request):
             }
         data['operator'] = User.objects.filter(userid=request.session['userid']).first()
         medicalrecord.objects.filter(id=id).update(**data)
+        patient.objects.filter(medicalrecord__id=id).update(pstatus='已看诊')
         return JsonResponse({'result': '提交成功'})
 
 # login
@@ -97,20 +174,74 @@ def selectUser(request):
         user = User.objects.filter(username=username, password=password, role=role).first()
         if user:
             request.session['userid'] = user.userid
+            request.session['userrole'] = user.role
             return HttpResponse(role)
         else:
             return HttpResponse('error')
 
 # outpatient_pay
 def selectPatientByPno(request, pid):
-    return
+    if request.method == 'POST':
+        pat = patient.objects.filter(pid=pid).first()
+        if pat:
+            data = {
+                'pid': pat.pid,
+                'pname': pat.pname,
+                'sex': pat.sex,
+                'createDate': pat.createdate,
+                'idcard': pat.idcard,
+                'level': {'levelname': pat.levelid.levelname},
+                'pstatus': pat.pstatus,
+                'dept': {'deptname': pat.deptid.deptname},
+                'doc': {'dname': pat.doctorid.dname},
+                }
+            data['cirList'] = []
+            cir = checkitemrecord.objects.filter(pid__pid=pid)
+            for item in cir:
+                data['cirList'].append({
+                    'paystatus': item.paystatus,
+                    'id': item.id,
+                    'checkItem': {
+                        'itemname': item.cid.itemname,
+                        'price': item.cid.price,
+                        },
+                    'amount': item.amount,
+                    })
+            data['iirList'] = []
+            iir = inspectitemrecord.objects.filter(pid__pid=pid)
+            for item in iir:
+                data['iirList'].append({
+                    'paystatus': item.paystatus,
+                    'id': item.id,
+                    'inspectItem': {
+                        'inspectname': item.inspectid.inspectname,
+                        'price': item.inspectid.price,
+                        },
+                    'amount': item.amount,
+                    })
+            return JsonResponse(data)
+        else:
+            return JsonResponse({'pid': 0})
 
 def payItems(request):
-    return
+    if request.method == 'POST':
+        cid = [int(i) for i in request.POST.getlist('cid')]
+        iid = [int(i) for i in request.POST.getlist('iid')]
+        for id in cid:
+            checkitemrecord.objects.filter(id=id).update(paystatus=1)
+        for id in iid:
+            inspectitemrecord.objects.filter(id=id).update(paystatus=1)
+        return JsonResponse({'result': '缴费成功'})
 
 # outpatient_refund
-def refundPatient(request):
-    return
+def refundPatient(request, pid):
+    if request.method == 'POST':
+        data = {
+            'pstatus': '已退号',
+            'status': 2,
+            }
+        patient.objects.filter(pid=pid).update(**data)
+        return JsonResponse({'result': '退号成功'})
 
 # outpatient_register
 def getPatientNo(request):
@@ -173,7 +304,7 @@ def savePatient(request):
                 'createdate': datetime.strptime(request.POST.get('createDate'), '%Y-%m-%d'),
                 'cost': int(request.POST.get('cost')),
                 }
-            data['status'] = 0
+            data['status'] = 1
             data['pstatus'] = '未看诊'
             data['operator'] = User.objects.filter(userid=request.session['userid']).first()
             patient.objects.create(**data)
