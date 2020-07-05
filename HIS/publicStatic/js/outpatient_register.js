@@ -59,7 +59,7 @@
 		}else{
 			pagenum=pagenum-1;
 			getPageData();
-			$("#pnum").html(parseInt($("#pnum").html())-1);
+			$("#pnum").html(pagenum);
 		}
 	})
 	//下一页
@@ -79,7 +79,7 @@
 				console.log(data);
 				//如果不是第一页，没有查询到数据
 				if(pagenum>1 && data.length>0){
-					$("#pnum").html(parseInt($("#pnum").html())+1);
+					$("#pnum").html(pagenum);
 				}
 				if (pagenum > 1 && data.length == 0) {
 					pagenum = pagenum - 1;

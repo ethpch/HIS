@@ -4,19 +4,22 @@
 # Create your views here.
 
 
+from django.contrib.auth.admin import User as AdminUser
+from django.contrib.auth import login, authenticate
+from django.shortcuts import redirect
 from django.http import HttpResponse, JsonResponse
 from HISOperator.models import User
 from hospital.models import *
 
-# admin
-def patient_dept_doctor(request):
-    if request.method == 'POST':
-        deptid = request.POST.get('deptid')
-        if deptid:
-            doctors = doctor.objects.filter(deptid=deptid).values_list('dname', flat=True)
-        else:
-            doctors = doctor.objects.all().values_list('dname', flat=True)
-        return JsonResponse(list(doctors), safe=False)
+## admin
+#def patient_dept_doctor(request):
+#    if request.method == 'POST':
+#        deptid = request.POST.get('deptid')
+#        if deptid:
+#            doctors = doctor.objects.filter(deptid=deptid).values_list('dname', flat=True)
+#        else:
+#            doctors = doctor.objects.all().values_list('dname', flat=True)
+#        return JsonResponse(list(doctors), safe=False)
 
 # doctor_checkitem
 def getAllCheckItem(request):
@@ -26,7 +29,10 @@ def getAllCheckItem(request):
 
 def getPatientByNo(request, pid):
     if request.method == 'POST':
-        pat = patient.objects.filter(pid=pid).first()
+        if request.META['HTTP_REFERER'].endswith('outpatient_refund.html'):
+            pat = patient.objects.filter(pid=pid).first()
+        else:
+            pat = patient.objects.filter(pid=pid, doctorid__id=request.session['doctorid']).first()
         if pat:
             data = {
                 'pid': pat.pid,
@@ -46,7 +52,7 @@ def getPatientByNo(request, pid):
 def saveCheckItemRecord(request, pid, dname):
     if request.method == 'POST':
         if len(request.POST) > 0:
-            pat = patient.objects.filter(pid=pid).first()
+            pat = patient.objects.filter(pid=pid, doctorid__dname=dname).first()
         try:
             for k, v in request.POST.items():
                 if 'cid' in k:
@@ -70,7 +76,7 @@ def getAllInspectItem(request):
 def saveInspectItemRecord(request, pid, dname):
     if request.method == 'POST':
         if len(request.POST) > 0:
-            pat = patient.objects.filter(pid=pid).first()
+            pat = patient.objects.filter(pid=pid, doctorid__dname=dname).first()
         try:
             for k, v in request.POST.items():
                 if 'inspectid' in k:
@@ -88,7 +94,7 @@ def saveInspectItemRecord(request, pid, dname):
 # doctor_medicalrecord
 def getPatientDataByDoctor(request):
     if request.method == 'POST':
-        pat = patient.objects.all()
+        pat = patient.objects.filter(doctorid__id=request.session['doctorid'])
         data = []
         for i in pat:
             data.append({
@@ -108,7 +114,7 @@ def getPatientDataByDoctor(request):
 def regMedicalRecord(request, pid):
     if request.method == 'POST':
         data = {
-            'pid': patient.objects.filter(pid=pid).first(),
+            'pid': patient.objects.filter(pid=pid, doctorid__id=request.session['doctorid']).first(),
             'description': request.POST.get('description'),
             'medicalhistory': request.POST.get('medicalhistory'),
             'familyhistory': request.POST.get('familyhistory'),
@@ -117,12 +123,13 @@ def regMedicalRecord(request, pid):
         data['status'] = 1
         data['operator'] = User.objects.filter(userid=request.session['userid']).first()
         medicalrecord.objects.create(**data)
+        patient.objects.filter(pid=pid).update(pstatus='已看诊')
         return JsonResponse({'result': '生成病例成功'})
 
 # doctor_result
 def getPatientAndMrData(request, pid):
     if request.method == 'POST':
-        pat = patient.objects.filter(pid=pid).first()
+        pat = patient.objects.filter(pid=pid, doctorid__id=request.session['doctorid']).first()
         mr = medicalrecord.objects.filter(pid__pid=pid).last()
         if pat and mr:
             data = {
@@ -158,7 +165,6 @@ def updateMedicalRecord(request):
             }
         data['operator'] = User.objects.filter(userid=request.session['userid']).first()
         medicalrecord.objects.filter(id=id).update(**data)
-        patient.objects.filter(medicalrecord__id=id).update(pstatus='已看诊')
         return JsonResponse({'result': '提交成功'})
 
 # login
@@ -171,12 +177,24 @@ def selectUser(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         role = request.POST.get('role')
-        user = User.objects.filter(username=username, password=password, role=role).first()
-        if user:
-            request.session['userid'] = user.userid
-            request.session['userrole'] = user.role
-            return HttpResponse(role)
+        if role != '系统管理员':
+            user = User.objects.filter(username=username, password=password, role=role).first()
+            if user:
+                request.session['userid'] = user.userid
+                request.session['userrole'] = role
+                request.session['doctorid'] = doctor.objects.filter(dname=user.username).first().id if role == '医生管理员' else 0
+                return HttpResponse(role)
+            else:
+                return HttpResponse('error')
         else:
+            if AdminUser.objects.filter(username=username):
+                user = authenticate(username=username, password=password)
+                if user:
+                    if user.is_active:
+                        login(request, user)
+                        request.session['userid'] = 0
+                        request.session['userrole'] = role
+                        return HttpResponse(role)
             return HttpResponse('error')
 
 # outpatient_pay

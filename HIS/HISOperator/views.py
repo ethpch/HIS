@@ -3,8 +3,8 @@
 # Create your views here.
 
 
-from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
+from django.http import HttpResponse, JsonResponse
 from django.middleware.csrf import get_token
 
 def login(request):
@@ -15,12 +15,12 @@ def login(request):
         elif role == '医生管理员':
             return redirect(reverse('doctor_medicalrecord'))
         elif role == '系统管理员':
-            pass
+            return redirect('admin:index')
     else:
         return render(request, 'login.html')
 
 def logout(request):
-    request.session.clear()
+    request.session.flush()
     return HttpResponse('1')
 
 def get_csrf(request):

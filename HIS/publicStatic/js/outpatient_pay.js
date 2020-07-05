@@ -72,7 +72,7 @@
 						//追加检验申请的记录
 						for(var i=0;i<data.iirList.length;i++){
 							var pstatus;
-							if(data.cirList[i].paystatus==0){
+							if(data.iirList[i].paystatus==0){
 								pstatus="未缴费";
 								$("#item_data").append("<tr><td><input type='checkbox' name='iid' value='"+data.iirList[i].id+"'    class='chk'  ></td>" +
 										"<td>"+data.iirList[i].inspectItem.inspectname+"</td>" +
