@@ -8,66 +8,25 @@ from .models import *
 
 
 def doctor_checkitem(request):
-    if 'userid' in request.session.keys():
-        if request.session['userrole'] == '门诊管理员':
-            return redirect(reverse('outpatient_register'))
-        return render(request, 'doctor_checkitem.html')
-    else:
-        return redirect(reverse('login'))
+    return render(request, 'doctor_checkitem.html')
 
 def doctor_inspectitem(request):
-    if 'userid' in request.session.keys():
-        if request.session['userrole'] == '门诊管理员':
-            return redirect(reverse('outpatient_register'))
-        return render(request, 'doctor_inspectitem.html')
-    else:
-        return redirect(reverse('login'))
+    return render(request, 'doctor_inspectitem.html')
 
 def doctor_medicalrecord(request):
-    if 'userid' in request.session.keys():
-        if request.session['userrole'] == '门诊管理员':
-            return redirect(reverse('outpatient_register'))
-        return render(request, 'doctor_medicalrecord.html')
-    else:
-        return redirect(reverse('login'))
+    return render(request, 'doctor_medicalrecord.html')
 
 def doctor_regmedicalrecord(request):
-    if 'userid' in request.session.keys():
-        if request.session['userrole'] == '门诊管理员':
-            return redirect(reverse('outpatient_register'))
-        return render(request, 'doctor_regmedicalrecord.html')
-    else:
-        return redirect(reverse('login'))
+    return render(request, 'doctor_regmedicalrecord.html')
 
 def doctor_result(request):
-    if 'userid' in request.session.keys():
-        if request.session['userrole'] == '门诊管理员':
-            return redirect(reverse('outpatient_register'))
-        return render(request, 'doctor_result.html')
-    else:
-        return redirect(reverse('login'))
+    return render(request, 'doctor_result.html')
 
 def outpatient_pay(request):
-    if 'userid' in request.session.keys():
-        if request.session['userrole'] == '医生管理员':
-            return redirect(reverse('doctor_medicalrecord'))
-        return render(request, 'outpatient_pay.html')
-    else:
-        return redirect(reverse('login'))
+    return render(request, 'outpatient_pay.html')
 
 def outpatient_refund(request):
-    if 'userid' in request.session.keys():
-        if request.session['userrole'] == '医生管理员':
-            return redirect(reverse('doctor_medicalrecord'))
-        return render(request, 'outpatient_refund.html')
-    else:
-        return redirect(reverse('login'))
+    return render(request, 'outpatient_refund.html')
 
 def outpatient_register(request):
-    print(request.session.get_session_cookie_age())
-    if 'userid' in request.session.keys():
-        if request.session['userrole'] == '医生管理员':
-            return redirect(reverse('doctor_medicalrecord'))
-        return render(request, 'outpatient_register.html')
-    else:
-        return redirect(reverse('login'))
+    return render(request, 'outpatient_register.html')

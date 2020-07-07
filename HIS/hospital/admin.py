@@ -9,13 +9,6 @@ from .models import *
 class patient_Admin(admin.ModelAdmin):
     list_display = ['pid', 'pname', 'sex', 'idcard', 'status']
 
-    #class Media:
-    #    js = (
-    #        'js/jquery-3.2.1.min.js',
-    #        'js/csrf_protect.js',
-    #        'js/admin.js',
-    #        )
-
 @admin.register(level)
 class level_Admin(admin.ModelAdmin):
     list_display = ['id', 'levelname']

@@ -1,14 +1,14 @@
-// ÍêÈ«Ç°ºó¶Ë·ÖÀë¿ª·¢µÄcsrf±£»¤½â¾ö·½°¸
+ï»¿// å®Œå…¨å‰åç«¯åˆ†ç¦»å¼€å‘çš„csrfä¿æŠ¤è§£å†³æ–¹æ¡ˆ
 var csrftoken;
-$.get('/csrf_token', function (resp) {
-	csrftoken = resp.token;  // ½ÓÊÜÊÓÍ¼º¯Êı·µ»ØµÄtoken£¬±£´æµ½È«¾Ö±äÁ¿ÖĞ
-	document.cookie = 'csrftoken=' + resp.token;  // tokenÉèÖÃµ½cookieÖĞ
+$.get('/api/csrf_token', function (resp) {
+	csrftoken = resp.token;  // æ¥å—è§†å›¾å‡½æ•°è¿”å›çš„tokenï¼Œä¿å­˜åˆ°å…¨å±€å˜é‡ä¸­
+	document.cookie = 'csrftoken=' + resp.token;  // tokenè®¾ç½®åˆ°cookieä¸­
 });
 function csrfSafeMethod(method) {
 	// these HTTP methods do not require CSRF protection
 	return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
-// ÔÚjqueryµÄÃ¿¸öÇëÇó·¢ÆğÇ°ÉèÖÃX-CSRFToken
+// åœ¨jqueryçš„æ¯ä¸ªè¯·æ±‚å‘èµ·å‰è®¾ç½®X-CSRFToken
 $.ajaxSetup({
 	beforeSend: function (xhr, settings) {
 		if (!csrfSafeMethod(settings.type) && !this.crossDomain) {

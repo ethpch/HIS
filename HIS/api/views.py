@@ -6,20 +6,15 @@
 
 from django.contrib.auth.admin import User as AdminUser
 from django.contrib.auth import login, authenticate
-from django.shortcuts import redirect
 from django.http import HttpResponse, JsonResponse
+from django.middleware.csrf import get_token
 from HISOperator.models import User
 from hospital.models import *
 
-## admin
-#def patient_dept_doctor(request):
-#    if request.method == 'POST':
-#        deptid = request.POST.get('deptid')
-#        if deptid:
-#            doctors = doctor.objects.filter(deptid=deptid).values_list('dname', flat=True)
-#        else:
-#            doctors = doctor.objects.all().values_list('dname', flat=True)
-#        return JsonResponse(list(doctors), safe=False)
+
+# csrf protect
+def get_csrf(request):
+    return JsonResponse({'token': get_token(request)})
 
 # doctor_checkitem
 def getAllCheckItem(request):

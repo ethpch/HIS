@@ -41,6 +41,9 @@
     <Compile Include="HISOperator\views.py" />
     <Compile Include="HISOperator\__init__.py" />
     <Compile Include="HIS\asgi.py" />
+    <Compile Include="HIS\HISInterceptor.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="HIS\settings.py" />
     <Compile Include="HIS\urls.py" />
     <Compile Include="HIS\wsgi.py" />
@@ -95,7 +98,6 @@
     <Content Include="publicStatic\img\refresh.png" />
     <Content Include="publicStatic\img\rubbish.png" />
     <Content Include="publicStatic\img\search.png" />
-    <Content Include="publicStatic\js\admin.js" />
     <Content Include="publicStatic\js\common.js" />
     <Content Include="publicStatic\js\csrf_protect.js" />
     <Content Include="publicStatic\js\doctor_checkitem.js" />
@@ -108,6 +110,7 @@
     <Content Include="publicStatic\js\outpatient_pay.js" />
     <Content Include="publicStatic\js\outpatient_refund.js" />
     <Content Include="publicStatic\js\outpatient_register.js" />
+    <Content Include="requirements.txt" />
     <Content Include="templates\doctor_checkitem.html" />
     <Content Include="templates\doctor_inspectitem.html" />
     <Content Include="templates\doctor_medicalrecord.html" />

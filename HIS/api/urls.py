@@ -3,8 +3,7 @@ from .views import *
 
 
 urlpatterns = [
-    # admin
-    #path('patient_dept_doctor', patient_dept_doctor),
+    path('csrf_token', get_csrf),
     # doctor_checkitem
     path('getAllCheckItem', getAllCheckItem),
     path('getPatientByNo/<int:pid>', getPatientByNo),
