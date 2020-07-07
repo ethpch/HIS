@@ -8,6 +8,7 @@ from django.contrib.auth.admin import User as AdminUser
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponse, JsonResponse
 from django.middleware.csrf import get_token
+from django.core.paginator import Paginator, EmptyPage
 from HISOperator.models import User
 from hospital.models import *
 
@@ -277,22 +278,25 @@ def getDeptData(request):
         return JsonResponse(list(depts), safe=False)
 
 def getPatientData(request, pagesize, pagenum):
+    patients = patient.objects.all()
+    patients = [{
+        'pid': item.pid,
+        'pname': item.pname,
+        'sex': item.sex,
+        'idcard': item.idcard,
+        'createDate': item.createdate.strftime('%Y-%m-%d'),
+        'level': {'levelname': item.levelid.levelname},
+        'pstatus': item.pstatus,
+        'status': item.status,
+        'dept': {'deptname': item.deptid.deptname},
+        'doc': {'dname': item.doctorid.dname}
+        } for item in patients]
+    paginator = Paginator(patients, pagesize)
     if request.method == 'POST':
-        patients = patient.objects.all()
-        patients = [{
-            'pid': item.pid,
-            'pname': item.pname,
-            'sex': item.sex,
-            'idcard': item.idcard,
-            'createDate': item.createdate.strftime('%Y-%m-%d'),
-            'level': {'levelname': item.levelid.levelname},
-            'pstatus': item.pstatus,
-            'status': item.status,
-            'dept': {'deptname': item.deptid.deptname},
-            'doc': {'dname': item.doctorid.dname}
-            } for item in patients]
-        patients = [patients[i:i+pagesize] for i in range(0, len(patients), pagesize)]
-        return JsonResponse(patients[pagenum-1], safe=False) if pagenum <= len(patients) else JsonResponse(list(), safe=False)
+        try:
+            return JsonResponse(list(paginator.page(pagenum)), safe=False)
+        except EmptyPage:
+            return JsonResponse([], safe=False)
 
 def getDoctorByDept(request, deptid):
     if request.method == 'POST':
